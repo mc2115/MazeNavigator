@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+<title>MazeGenerator</title>
+
+<script id="vertex-shader" type="x-shader/x-vertex">
+#version 300 es
+
+in vec4 aPosition;
+uniform float uTheta;
+
+void
+main()
+{
+    float s = sin(uTheta);
+    float c = cos(uTheta);
+
+    gl_Position.x = aPosition.x;
+    gl_Position.y = aPosition.y;
+    gl_Position.z = 0.0;
+    gl_Position.w = 1.0;
+}
+</script>
+
+<script id="fragment-shader" type="x-shader/x-fragment">
+#version 300 es
+precision mediump float;
+
+out vec4 fColor;
+
+void
+main()
+{
+    fColor = vec4( 0.0, 0.0, 0.0, 1.0 );
+}
+</script>
+
+<script type="text/javascript" src="./Common/initShaders.js"></script>
+<script type="text/javascript" src="./Common/MVnew.js"></script>
+<script type="text/javascript" src="MazeGenerator.js"></script>
+</head>
+
+<body>
+<!--<div>
+speed 0% <input id="slider" type="range"
+ min="0" max="100" step="10" value="50" />
+ 100%
+</div>-->
+<style>
+h1 {
+  font-size: 2.5em; /* 40px/16=2.5em */
+}
+
+h2 {
+  font-size: 1.875em; /* 30px/16=1.875em */
+ }
+
+p {
+  font-size: 0.875em; /* 14px/16=0.875em */
+}
+button.pos_right {
+  position: relative;
+  bottom: 600px;
+  left: 50px;
+}
+h1.pos_right{
+  position: relative;
+  left: 400px;
+}
+</style>
+<label for="xval">X (width):</label>
+<input type="number" id="xval" ><br><br>
+<label for="yval">Y (height):</label>
+<input type="number" id="yval"><br><br>
+<p id="sizeX">
+
+</p>
+<p id="sizeY">
+
+</p>
+<h1 id="maze" class="pos_right">
+  Maze not done yet
+</h1>
+
+<button id="Direction" class="pos_right">Reset Maze</button>
+<button id="ResetPos" class="pos_right">Reset Position</button>
+<!--<select id="Controls" size="3">
+    <option value="0">Toggle Rotation Direction</option>
+    <option value="1">Spin Faster</option>
+    <option value="2">Spin Slower</option>
+</select>-->
+
+<canvas id="gl-canvas" width="512" height="512">
+Oops ... your browser doesn't support the HTML5 canvas element
+</canvas>
+</body>
+</html>
